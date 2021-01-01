@@ -1,6 +1,7 @@
 import { Button, Text, Input, Icon } from "@ui-kitten/components";
 import React from "react";
 import { TouchableWithoutFeedback, View } from "react-native";
+import { SCREENS } from "../App";
 import { ILoginRequest } from "../Interfaces/dtos";
 import BaseScreen, { IBaseScreenProps } from "./BaseScreen";
 
@@ -11,7 +12,7 @@ function useLoginRequest():[ILoginRequest,(lr:ILoginRequest)=> void] {
 
 
 
-const WelcomeScreen: React.FC<IBaseScreenProps> = (props) => {
+const LoginScreen: React.FC<IBaseScreenProps> = (props) => {
     const [loginRequestData, setLReqData] = useLoginRequest();
     const [isSecure, setSecure] = React.useState(true);
     function toggleSecure(){setSecure(!isSecure)}
@@ -21,12 +22,13 @@ const WelcomeScreen: React.FC<IBaseScreenProps> = (props) => {
         </TouchableWithoutFeedback>
       );
     return (
-        <BaseScreen navigation={props.navigation} pageTitle={"Home"}>
-            <Text category={"h4"} >{"Welcome to the Main Screen"}</Text>
-            <View>
-                <Button  >{"Login"}</Button>
+        <BaseScreen pageTitle={"Monicet App"}>
+
+            <View style={{ paddingTop: 48 }}>
+
 
                 <Input
+                    style={{ width: 310 }}
                     placeholder='Insert Email'
                     value={loginRequestData.email}
                     onChangeText={email => setLReqData({...loginRequestData,email})}
@@ -38,7 +40,10 @@ const WelcomeScreen: React.FC<IBaseScreenProps> = (props) => {
                     value={loginRequestData.password}
                     onChangeText={password => setLReqData({...loginRequestData,password})}
                 />
+                <Button onPress={() => props.navigation.navigate(SCREENS.HOME)} style={{ marginTop: 16 }}  >{"Login"}</Button>
             </View>
         </BaseScreen>
     )
 }
+
+export default LoginScreen;

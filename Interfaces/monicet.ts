@@ -2,11 +2,10 @@ import { LineString, Point } from "geojson";
 import { IDarwinCoreEvent, IOcurrence } from "./darwinCore";
 
 export interface ISeaPosition {
-    coordinates: Point;
-    elevation: number;
-    distanceToCoastInM: number;
-    seaDepthAtPosition: number;
-    seaSlopeInRadians: number;
+    location: Point;
+    distanceToCoastInM?: number;
+    seaDepthAtPosition?: number;
+    seaSlopeInRadians?: number;
 }
 
 export interface ITimePlace {
@@ -17,7 +16,7 @@ export interface ITimePlace {
 
 export interface IEffort {
     start: ITimePlace;
-    end: ITimePlace;
+    end?: ITimePlace;
 }
 
 
@@ -34,7 +33,7 @@ export interface IAtmosfericData {
     weather: BEAUFORT_SEA_STATE
 }
 
-export interface ISortie extends IEffort, IAtmosfericData {
+export interface ISortie extends IEffort, IAtmosfericData, IMonicetSortieData {
     id?: string;
     routeHistory: LineString;
     seaRoute: ISeaPosition[];
@@ -56,11 +55,6 @@ export interface ISighting extends IEffort, IDarwinCoreEvent {
     encounters: IEncounter[];
     mediaAssets: IMediaAsset[]
     nrBoatsPresent: number;
-}
-
-export interface IEffort {
-    startedAt: number;
-    endedAt: number;
 }
 
 export interface IEncounter extends IOcurrence {

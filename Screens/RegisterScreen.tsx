@@ -1,15 +1,17 @@
 import { Button, Text } from "@ui-kitten/components";
 import { View } from "react-native";
 import BaseScreen, { IBaseScreenProps } from "./BaseScreen";
+import React from "react";
 
-const WelcomeScreen: React.FC<IBaseScreenProps> = (props) => {
+const RegistrationScreen: React.FC<IBaseScreenProps> = (props) => {
     return (
-        <BaseScreen navigation={props.navigation} pageTitle={"Home"}>
-            <Text category={"h4"} >{"Welcome to the Main Screen"}</Text>
+        <BaseScreen navigation={props.navigation} pageTitle={"Registration"}>
+            <Text category={"h4"} >{"Welcome to the Registration Page"}</Text>
             <View>
-                <Button  >{"Login"}</Button>
                 <Button>{"Register"}</Button>
             </View>
         </BaseScreen>
     )
 }
+
+export default RegistrationScreen;
