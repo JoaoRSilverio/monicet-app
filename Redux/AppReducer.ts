@@ -1,4 +1,5 @@
 import { Position } from "geojson";
+import { actionClearAppRequests } from "../Actions/ActionCreators";
 import ACTIONS from "../Actions/Actions";
 import { ISeaPosition, ISortie } from "../Interfaces/monicet";
 import IAppServiceState, {
@@ -57,7 +58,7 @@ export default function appReducer(
     state: IMonicetAppGlobalState = intialState,
     action: IAction
 ): IMonicetAppGlobalState {
-    console.log("ACTION -> ", action);
+    console.log(`ACTION -> ${action.type}`);
     return {
         auth: authReducer(state.auth, action),
         activeSortie: activeSortieReducer(state.activeSortie, action),

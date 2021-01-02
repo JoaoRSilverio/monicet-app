@@ -39,7 +39,7 @@ const App = () => {
       <IconRegistry icons={EvaIconsPack} />
     <ApplicationProvider {...eva} theme={eva.light}>
         <Provider store={store}>
-          <Stack.Navigator initialRouteName={SCREENS.WELCOME}>
+          <Stack.Navigator initialRouteName={SCREENS.HOME}>
             <Stack.Screen name={SCREENS.WELCOME} component={WelcomeScreen} />
             <Stack.Screen name={SCREENS.HOME} component={HomeScreen} />
             <Stack.Screen name={SCREENS.REGISTRATION} component={RegistrationScreen} />

@@ -9,7 +9,7 @@ export interface ISeaPosition {
 }
 
 export interface ITimePlace {
-    location: Point;
+    location?: Point;
     epochTime: number;
 
 }

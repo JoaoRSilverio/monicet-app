@@ -1,9 +1,10 @@
 import { MeasureElement } from "@ui-kitten/components/devsupport";
 import {
+    actionClearAppRequests,
     actionClearUiMsgList, actionClearUiMsgLog,
-    actionLogUiMsg, actionUpdateUiMsgList
+    actionLogUiMsg, actionUpdateAppRequests, actionUpdateUiMsgList
 } from "../Actions/ActionCreators";
-import { IAppMessage } from "../Redux/StateInterface";
+import { IAppMessage, IAppRequest } from "../Redux/StateInterface";
 import store from "../Store/store";
 
 export default class AppUIMessageServices {
@@ -27,5 +28,15 @@ export default class AppUIMessageServices {
     }
     public static clearMessageLog() {
         store.dispatch(actionClearUiMsgLog());
+    }
+
+    public static clearUiRequest(request: IAppRequest) {
+        const { requests } = store.getState().appServiceState;
+        const updatedList = requests.filter(rq => rq.request !== request.request);
+        store.dispatch(actionUpdateAppRequests(updatedList));
+    }
+
+    public static clearUiRequests() {
+        store.dispatch(actionClearAppRequests());
     }
 }

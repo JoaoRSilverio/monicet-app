@@ -73,7 +73,7 @@ export enum APP_PERMISSIONS {
 export interface IAppRequest {
     requestType: APP_REQUEST_TYPE;
     request: any | APP_PERMISSIONS;
-
+    onAccepted?: () => void;
 }
 
 export interface IAppMessage {

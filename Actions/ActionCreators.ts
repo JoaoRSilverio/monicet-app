@@ -7,7 +7,7 @@ interface IAction<T> {
     type: string;
     payload: T
 }
-
+// AUTH
 export function actionSaveTokens(
     accessToken: string, refreshToken: string): IAction<ITokensAuth> {
     return {
@@ -23,17 +23,25 @@ export function actionSaveProfile(
         payload: { email, username }
     }
 }
+// AUTH
 
+// SORTIE
 export function actionInitiateNewSortie(sortie: ISortie): IAction<ISortie> {
-    console.log("starting action");
     return {
         type: ACTIONS.ACTIVE_SORTIE_START,
         payload: sortie
     }
 }
+
+export function actionRunSortie(): IAction<undefined> {
+    return {
+        payload: undefined,
+        type: ACTIONS.ACTIVE_SORTIE_RUN
+    }
+}
 export function actionUpdateActiveSortie(sortie: ISortie): IAction<ISortie> {
     return {
-        type: ACTIONS.ACTIVE_SORTIE_UPDATE_ROUTE,
+        type: ACTIONS.ACTIVE_SORTIE_UPDATE,
         payload: sortie
     }
 }
@@ -43,18 +51,22 @@ export function actionEndActiveSortie(): IAction<undefined> {
         payload: undefined
     }
 }
-export function actionUpdateAppRequests(requests: IAppRequest[]): IAction<IAppRequest[]> {
-    return {
-        type: ACTIONS.APP_UI_REQUESTS_UPDATE,
-        payload: requests
-    }
-}
 export function actionSaveSortieLocally(sortie: ISortie): IAction<ISortie> {
     return {
         type: ACTIONS.ACTIVE_SORTIE_STORE,
         payload: sortie
     }
 }
+// SORTIE
+
+// APP REQUESTS AND MESSAGES
+export function actionUpdateAppRequests(requests: IAppRequest[]): IAction<IAppRequest[]> {
+    return {
+        type: ACTIONS.APP_UI_REQUESTS_UPDATE,
+        payload: requests
+    }
+}
+
 export function actionClearAppRequests(): IAction<undefined> {
     return {
         type: ACTIONS.APP_UI_REQUESTS_CLEAR,
@@ -87,7 +99,9 @@ export function actionLogUiMsg(message: IAppMessage): IAction<IAppMessage> {
         payload: message
     }
 }
+// APP REQUESTS AND MESSAGES
 
+// SEA STOPS
 export function actionInitiateASeaStop(seaStop: ISeaStop): IAction<ISeaStop> {
     return {
         type: ACTIONS.SEA_STOP_START,
@@ -101,4 +115,5 @@ export function actionEndASeaStop(): IAction<undefined> {
         payload: undefined
     }
 }
+// SEA STOPS
 

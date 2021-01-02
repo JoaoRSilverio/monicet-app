@@ -1,13 +1,42 @@
-import { Location } from "react-native-location";
-import { actionEndActiveSortie, actionEndASeaStop, actionInitiateASeaStop, actionSaveSortieLocally, actionUpdateActiveSortie } from "../Actions/ActionCreators";
-import { ISeaStop } from "../Interfaces/monicet";
+import RNLocation, { Location } from "react-native-location";
+import { actionRunSortie, actionEndActiveSortie, actionEndASeaStop, actionInitiateASeaStop, actionInitiateNewSortie, actionSaveSortieLocally, actionUpdateActiveSortie } from "../Actions/ActionCreators";
+import { BEAUFORT_SEA_STATE, ISeaStop, ISortie, MONICET_VISIBILITY_STATE } from "../Interfaces/monicet";
 import { APP_WARNING_TYPE } from "../Redux/StateInterface";
 import store from "../Store/store";
 import AppUIMessageServices from "./AppMessagesService";
 import TripGeoLoggerService from "./TripGeoLoggerService";
 
+async function createNewSortie(): Promise<ISortie> {
+    //  const location = await RNLocation.getLatestLocation();
+
+    return {
+        skipper: "SkipperMan",
+        averageKnots: 0,
+        boat: "defaultBoat",
+        maxKnots: 0,
+        routeHistory: {
+            type: "LineString",
+            coordinates: []
+        },
+        seaRoute: [],
+        sightings: [],
+        sortieDurationInSec: 0,
+        stops: [],
+        visibility: MONICET_VISIBILITY_STATE.UNKNOWN,
+        start: {
+            epochTime: Date.now(),
+            location: {
+                type: "Point",
+                coordinates: []
+            }
+        },
+        weather: BEAUFORT_SEA_STATE.CALM
+
+    }
+}
+
 export default class SortieService {
-    public static startSortie(): void {
+    public static async startSortie(): Promise<void> {
 
         // check if a sortie is active
         // if is active STORE_ACTIVE_SORTIE e reset phase
@@ -66,7 +95,9 @@ export default class SortieService {
             });
             return;
         }
-
+        const newSortie = await createNewSortie();
+        store.dispatch(actionInitiateNewSortie(newSortie));
+        store.dispatch(actionRunSortie());
         TripGeoLoggerService.startGPSLogging(onMovementStop, onResumeMoving);
         //
         // create a new sortie 

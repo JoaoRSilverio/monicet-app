@@ -8,7 +8,7 @@ export enum ACTIONS {
     ACTIVE_SORTIE_START = "startActiveSortie",
     ACTIVE_SORTIE_END = "clearActiveSortie",
     ACTIVE_SORTIE_STORE = "storeActiveSortie",
-    ACTIVE_SORTIE_RUN = "initActiveSortie",
+    ACTIVE_SORTIE_RUN = "runActiveSortie",
     ACTIVE_SORTIE_UPDATE_SEA_INFO = "updateSeaInfo",
     ACTIVE_SORTIE_UPDATE_ROUTE = "updateSortieRoute",
     // SIGHTING
