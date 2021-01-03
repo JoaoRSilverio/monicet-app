@@ -17,6 +17,10 @@ export default class AppUIMessageServices {
             ]));
         store.dispatch(actionLogUiMsg(message));
     }
+    public static addRequest(request: IAppRequest) {
+        const requests = store.getState().appServiceState.requests;
+        store.dispatch(actionUpdateAppRequests([...requests, request]));
+    }
     public static removeMessage(index: number) {
         const { appServiceState } = store.getState();
         const clonedList = appServiceState.messages.slice(index);

@@ -22,7 +22,7 @@ const HomeScreen: React.FC<IHomeScreenProps> = (props) => {
             <Text category={"h5"} >{"Inicie Uma Viagem ou adicione um avistamento"}</Text>
             <View>
                 <Button onPress={() => startNewSortie()} >{" + Viagem"}</Button>
-                <Button onPress={() => props.navigation.navigate(SCREENS.LOGIN)} >{" + Avistamento"}</Button>
+                <Button onPress={() => props.navigation.navigate(SCREENS.SIGHTING_CREATE)} >{" + Avistamento"}</Button>
             </View>
             {props.sortie &&
 

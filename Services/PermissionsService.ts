@@ -16,6 +16,37 @@ export default class PermissionService {
         );
         response ? onAccepted() : onRejected();
     }
+    public static async askFileWritePermission(
+        onAccepted: () => void,
+        onRejected: () => void
+    ) {
+        const response = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
+            {
+                title: "for pictures save",
+                message: "We use it to GPS tag pictures and provide a MYtrip visualization at the end of the trip",
+                buttonNegative: "Refuse",
+                buttonPositive: "Accept"
+            }
+        );
+        response ? onAccepted() : onRejected();
+    }
+
+    public static async askFileReadPermission(
+        onAccepted: () => void,
+        onRejected: () => void
+    ) {
+        const response = await PermissionsAndroid.request(
+            PermissionsAndroid.PERMISSIONS.READ_EXTERNAL_STORAGE,
+            {
+                title: "for pictures read",
+                message: "We use it to GPS tag pictures and provide a MYtrip visualization at the end of the trip",
+                buttonNegative: "Refuse",
+                buttonPositive: "Accept"
+            }
+        );
+        response ? onAccepted() : onRejected();
+    }
 
     public static async askCameraPermission(
         onAccepted: () => void,

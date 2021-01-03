@@ -15,12 +15,13 @@ export interface IBaseScreenProps {
 interface IBaseScreenBaseProps {
     children: any;
     pageTitle: string;
-    appService: IAppServiceState;
+    appService?: IAppServiceState;
 
 }
 
 const BaseScreen: React.FC<IBaseScreenBaseProps> = (props) => {
     const { appService } = props;
+    if (!appService) return null;
     const { hasInternetConnection, isGeoLoggerRunning, requests, messages } = appService;
     return (
         <View style={{ alignItems: "center", paddingTop: 16 }}>

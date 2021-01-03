@@ -68,6 +68,8 @@ export enum APP_REQUEST_TYPE {
 export enum APP_PERMISSIONS {
     CAMERA,
     LOCATION,
+    WRITE_FILES,
+    READ_FILES
 }
 
 export interface IAppRequest {

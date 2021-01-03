@@ -26,14 +26,27 @@ interface IPermissionDialogProps {
 const PermissionDialog: React.FC<IPermissionDialogProps> = (props) => {
     let title = "";
     let description = "";
+    let permissionServiceCall: (onAccepted: any, onRejected: any) => void = () => { };
     switch (props.permission) {
         case APP_PERMISSIONS.CAMERA:
             title = "We need Camera Permissions";
             description = "In order to allow to take photos and add them to sighting";
+            permissionServiceCall = PermissionService.askCameraPermission;
             break;
         case APP_PERMISSIONS.LOCATION:
             title = "We need Location Permissions";
             description = "In order to Place the Sightings corretly we need your GPS Location";
+            permissionServiceCall = PermissionService.askGPSPermission;
+        case APP_PERMISSIONS.READ_FILES:
+            title = "We need to read files";
+            description = "yeah";
+            permissionServiceCall = PermissionService.askFileReadPermission;
+
+        case APP_PERMISSIONS.WRITE_FILES:
+            title = "we need to write files";
+            description = "yeah";
+            permissionServiceCall = PermissionService.askFileWritePermission;
+
         default:
     }
     function onPermissionRejected() {
@@ -48,8 +61,8 @@ const PermissionDialog: React.FC<IPermissionDialogProps> = (props) => {
             {
                 request: props.permission,
                 requestType: APP_REQUEST_TYPE.PERMISSIONS,
-            })
-        props.onAccepted && PermissionService.askGPSPermission(props.onAccepted, onPermissionRejected)
+            });
+        props.onAccepted && permissionServiceCall(props.onAccepted, onPermissionRejected)
     }
     return (
         <BaseDialog title={title} description={description} onOk={onOkPress} />

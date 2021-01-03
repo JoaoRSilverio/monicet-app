@@ -40,7 +40,7 @@ const LoginScreen: React.FC<IBaseScreenProps> = (props) => {
                     value={loginRequestData.password}
                     onChangeText={password => setLReqData({...loginRequestData,password})}
                 />
-                <Button onPress={() => props.navigation.navigate(SCREENS.HOME)} style={{ marginTop: 16 }}  >{"Login"}</Button>
+                <Button onPress={() => props.navigation.navigate(SCREENS.NAV_MAIN_MENU_TABS, { screen: SCREENS.HOME })} style={{ marginTop: 16 }}  >{"Login"}</Button>
             </View>
         </BaseScreen>
     )
